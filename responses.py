@@ -7,4 +7,3 @@ def handle_respons(message) -> str:
     if p_message == "!help":
         return "This is help message for tarociarz bot"
     
-    return "idk ;["
