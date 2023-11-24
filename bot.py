@@ -39,11 +39,11 @@ def run_discord_bot():
             if user_message[0] == '?':
                 user_message = user_message[1:]
                 await send_message(message, user_id, user_message, channel, is_private=True)
-            elif user_message == 'rozlosuj wszystkim':
+            elif user_message == 'wylosuj wszystkim':
                 memebers = [member for member in client.get_all_members() if not member.bot]
                 for user in memebers:
                     #print(user.name)
-                    await send_message(message, user.id, "rozlosuj", channel, is_private=False)  
+                    await send_message(message, user.id, "wylosuj mi", channel, is_private=False)  
             else:
                 await send_message(message, user_id, user_message, channel, is_private=False)
         

@@ -9,7 +9,7 @@ def handle_respons(id, message, channel) -> str:
     if p_message == "!help":
         return "This is help message for tarociarz bot"
     
-    if p_message =="rozlosuj":
+    if p_message =="wylosuj mi":
         card = tarot.get_cards()
         return f"<@{id}> Karta dla ciebie to **{card['title']}**\n{card['description']}"
     
