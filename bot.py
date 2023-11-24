@@ -45,7 +45,9 @@ def run_discord_bot():
         
         print(f"{username} said '{user_message}' on channel '{channel}'")
         
-        if channel == 'boty':
+        if channel == 'boty' or user_message.split()[0] == "!Tarociarz":
+            if "!Tarociarz" in user_message:
+                user_message = user_message.replace("!Tarociarz ", "")
             if user_message[0] == '?':
                 user_message = user_message[1:]
                 await send_message(message, user_id, user_message, channel, is_private=True)
