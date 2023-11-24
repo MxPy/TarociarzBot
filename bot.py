@@ -9,12 +9,13 @@ async def send_message(message, id, user_message, channel, is_private):
     card = tarot.get_cards()
     try:
         response = responses.handle_respons(id, user_message, card)
-        file_path = f"cards/{card['title']}.jpg"
-        
-        if is_private:
-            await message.author.send(response, file=discord.File(file_path))
-        else:
-            await message.channel.send(response, file=discord.File(file_path))
+        if response:
+            file_path = f"cards/{card['title']}.jpg"
+            
+            if is_private:
+                await message.author.send(response, file=discord.File(file_path))
+            else:
+                await message.channel.send(response, file=discord.File(file_path))
 
     
 
@@ -45,7 +46,7 @@ def run_discord_bot():
         
         print(f"{username} said '{user_message}' on channel '{channel}'")
         
-        if channel == 'boty' or user_message.split()[0] == "!Tarociarz":
+        if channel == 'boty' or user_message.split()[0] == "!Tarociarz" or channel == 'taroty':
             if "!Tarociarz" in user_message:
                 user_message = user_message.replace("!Tarociarz ", "")
             if user_message[0] == '?':
@@ -53,8 +54,9 @@ def run_discord_bot():
                 await send_message(message, user_id, user_message, channel, is_private=True)
                 #TODO move this logic to responses
             elif user_message == 'wylosuj wszystkim':
-                memebers = [member for member in client.get_all_members() if not member.bot]
-                for user in memebers:
+                guild = message.guild
+                members = [member for member in guild.members if not member.bot]
+                for user in members:
                     #print(user.name)
                     await send_message(message, user.id, "wylosuj mi", channel, is_private=False)  
             else:
