@@ -1,6 +1,8 @@
 import discord
 import responses
 import os
+from dotenv import load_dotenv
+
 
 async def send_message(message, user_message, is_private):
     try:
@@ -10,4 +12,12 @@ async def send_message(message, user_message, is_private):
         print(e)
         
 def run_discord_bot():
-    TOKEN = os.environ["BOT_KEY"]
+    load_dotenv()
+    TOKEN = os.getenv("BOT_TOKEN")
+    client = discord.Client(intents=discord.Intents.default())
+    
+    @client.event
+    async def on_ready():
+        print(f'{client.user} is now running')
+        
+    client.run(TOKEN)
