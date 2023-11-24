@@ -1,4 +1,6 @@
-def handle_respons(message) -> str:
+import tarot
+
+def handle_respons(id, message, channel) -> str:
     p_message = message.lower()
     
     if p_message == "hello":
@@ -6,4 +8,8 @@ def handle_respons(message) -> str:
     
     if p_message == "!help":
         return "This is help message for tarociarz bot"
+    
+    if p_message =="rozlosuj":
+        card = tarot.get_cards()
+        return f"<@{id}> Karta dla ciebie to **{card['title']}**\n{card['description']}"
     
