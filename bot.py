@@ -4,12 +4,11 @@ import os
 import tarot
 from dotenv import load_dotenv
 
-
 async def send_message(message, id, user_message, channel, is_private):
     card = tarot.get_cards()
     try:
         response = responses.handle_respons(id, user_message, card)
-        if response.split()[0] == "Karta":
+        if response.split()[0] == "Karta" or response.split()[1] == "Karta":
             file_path = f"cards/{card['title']}.jpg"
             if is_private:
                 await message.author.send(response, file=discord.File(file_path))
